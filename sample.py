@@ -7,4 +7,5 @@ tokenizer: Tokenizer = Tokenizer.from_pretrained("NotShrirang/marathi-tokenizer"
 text = "नमस्कार, तुम्ही कसे आहात? मी ठीक आहे. तुम्ही ठीक आहात का? "
 encoded = tokenizer.encode(text)
 print(f"Encoded text: {encoded}")
+print(f"Number of tokens: {len(encoded.ids)}")
 print(f"Decoded text: {tokenizer.decode(encoded.ids)}")

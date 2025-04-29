@@ -49,7 +49,24 @@ def train_bpe_tokenizer(dataset, vocab_size=32768, min_frequency=2, output_dir="
     return tokenizer, hf_tokenizer
 
 if __name__ == "__main__":
-    ds = datasets.load_dataset("samarthSonawane/marathi_news_articles")
+    ds1 = datasets.load_dataset("samarthSonawane/marathi_news_articles")
+    ds2 = datasets.load_dataset("shivam/marathi_samanantar_processed")
+    ds3 = datasets.load_dataset("Tensoic/GPTeacher-Marathi")
+    ds4 = datasets.load_dataset("Cognitive-Lab/Aya_Marathi", "complete_dataset")
+
+    ds3 = ds3.rename_column("output", "text")
+    ds3 = ds3.map(lambda x: {"text": f'{x["instruction"]}\n\n{x["text"]}'})
+
+    ds4 = ds4.map(lambda x: {"text": f'{x["inputs"]}\n\n{x["targets"]}'})
+
+    ds = datasets.concatenate_datasets([ds1['train'], ds2['train'], ds3['train'], ds4['train']])
+
+    ds = ds.with_format("torch")
+
+    ds = ds.remove_columns(['instruction', 'input', 'inputs', 'targets', 'task_type', 'id', 'template_id', 'dataset_name', 'script', 'split', 'sub_dataset_name', 'language'])
+
+    # There should be one split of dataset named "train"
+    ds = {"train": ds}
 
     tokenizer, hf_tokenizer = train_bpe_tokenizer(
         dataset=ds,

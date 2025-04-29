@@ -8,6 +8,6 @@ hfToken = "<HF_TOKEN>"
 hf_tokenizer = PreTrainedTokenizerFast(tokenizer_object=tokenizer)
 hf_tokenizer.push_to_hub(
     repo_id="NotShrirang/marathi-tokenizer",
-    use_auth_token=hfToken
+    token=hfToken
 )
 
