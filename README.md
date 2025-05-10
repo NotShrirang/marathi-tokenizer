@@ -15,6 +15,26 @@ Marathi Tokenizer is an open-source project for tokenizing Marathi text using By
 
 ---
 
+## 📖 Usage:
+
+Example usage with the trained tokenizer:
+  
+(It is a gated repository, so for using this model, you will have to get an access token from HuggingFace.)
+```python
+from tokenizers import Tokenizer
+
+hfToken = "<HUGGINGFACE_TOKEN>"
+
+tokenizer: Tokenizer = Tokenizer.from_pretrained("NotShrirang/marathi-tokenizer", token=hfToken)
+
+text = "मराठी भाषा ही भारतातील एक प्रमुख भाषा आहे."
+
+encoded = tokenizer.encode(text)
+
+print("Encoded token IDs:", encoded)
+print("Decoded text:", tokenizer.decode(encoded))
+```
+
 ## ✨ Features
 
 - 🧠 **BPE Encoding**: Leverages Byte Pair Encoding to tokenize Marathi text into subword units efficiently.
@@ -66,7 +86,7 @@ Marathi Tokenizer is an open-source project for tokenizing Marathi text using By
 
 ---
 
-## 📖 Usage
+## 🔨 Training
 
 1. **Training the Tokenizer**:
 
@@ -78,27 +98,7 @@ Marathi Tokenizer is an open-source project for tokenizing Marathi text using By
 
    The tokenizer will be saved in the `marathi_bpe_tokenizer` directory.
 
-2. **Using the Tokenizer**:
-
-   Example usage with the trained tokenizer:
-  
-  (It is a gated repository, so for using this model, you will have to get an access token from HuggingFace.)
-   ```python
-   from tokenizers import Tokenizer
-  
-   hfToken = "<HUGGINGFACE_TOKEN>"
-  
-   tokenizer: Tokenizer = Tokenizer.from_pretrained("NotShrirang/marathi-tokenizer", token=hfToken)
-   
-   text = "मराठी भाषा ही भारतातील एक प्रमुख भाषा आहे."
-
-   encoded = tokenizer.encode(text)
-
-   print("Encoded token IDs:", encoded)
-   print("Decoded text:", tokenizer.decode(encoded))
-   ```
-
-3. **Sample Encoding**:
+2. **Sample Encoding**:
 
    A sample usage script `sample.py` is included for testing the tokenizer:
 
@@ -108,18 +108,9 @@ Marathi Tokenizer is an open-source project for tokenizing Marathi text using By
 
 ---
 
-## 🗺️ Roadmap
-
-- [x] Support for BPE-based tokenization.
-- [x] Integration with Hugging Face datasets and tokenizer.
-- [ ] Extend support for SentencePiece tokenization.
-- [ ] Add tokenization benchmarks and evaluation scripts.
-
----
-
 ## ⚙️ Configuration
 
-- **Vocabulary Size**: Default is set to `32768`, adjustable via script parameters.
+- **Vocabulary Size**: Default is set to `32768`.
 - **Minimum Frequency**: Default is `2`, configurable for token inclusion.
 - **Datasets**: Combines multiple Marathi datasets for comprehensive coverage.
 
